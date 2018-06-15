@@ -1,14 +1,21 @@
 # MIT License
 # Copyright (c) 2017 MassChallenge, Inc.
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import permissions
-from algoliasearch import algoliasearch
-from django.conf import settings
-from accelerator_abstract.models import CURRENT_STATUSES
-from accelerator.models import UserRole
 import time
+from algoliasearch import algoliasearch
+
+from django.conf import settings
+from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from accelerator_abstract.models import (
+    ACTIVE_PROGRAM_STATUS,
+    ENDED_PROGRAM_STATUS,
+)
+from accelerator.models import UserRole
+
+
+ACTIVE_AND_ENDED = [ACTIVE_PROGRAM_STATUS, ENDED_PROGRAM_STATUS]
 
 
 def _get_user_filters(request):
@@ -16,9 +23,8 @@ def _get_user_filters(request):
         active_roles.append(UserRole.MENTOR)
         facet_filters = []
         for grant in request.user.programrolegrant_set.filter(
-                program_role__program__program_status__in=CURRENT_STATUSES,
-                program_role__user_role__name__in=active_roles
-        ):
+                program_role__program__program_status__in=ACTIVE_AND_ENDED,
+                program_role__user_role__name__in=active_roles):
             facet_filters.append(
                 'confirmed_mentor_programs:"{active_program}"'.format(
                     active_program=grant.program_role.program.name))
