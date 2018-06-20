@@ -100,7 +100,13 @@ class Base(Configuration):
         'rest_framework_swagger',
         'fluent_pages',
         'impact',
+        'graphene_django',
     ]
+
+    GRAPHENE = {
+        'SCHEMA': 'impact.graphql_schema.schema'
+    }
+
     ACCELERATOR_MODELS_ARE_MANAGED = True
 
     AUTH_USER_MODEL = 'simpleuser.User'
@@ -153,7 +159,7 @@ class Base(Configuration):
         'localhost:1234',
         'localhost:8000',
     )
-    CORS_ORIGIN_REGEX_WHITELIST = (r'^(https?://)?(\w+\.)?masschallenge\.org$', )
+    CORS_ORIGIN_REGEX_WHITELIST = (r'^(https?://)?(\w+\.)', )
     ALGOLIA_INDEX_PREFIX = os.environ.get('ALGOLIA_INDEX_PREFIX', 'dev')
     ALGOLIA_INDEXES = [
         '{algolia_prefix}_mentor'.format(algolia_prefix=ALGOLIA_INDEX_PREFIX)

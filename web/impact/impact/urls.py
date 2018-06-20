@@ -10,7 +10,9 @@ from django.conf.urls import (
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
 from drf_auto_endpoint.router import router as schema_router
+from graphene_django.views import GraphQLView
 from rest_framework import routers
 from rest_framework_jwt.views import (
     obtain_jwt_token,
@@ -82,7 +84,8 @@ urls = [
     url(r'^sso/', include(sso_urlpatterns, namespace="sso")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include(account_urlpatterns)),
-
+    url(r'^graphql/$', csrf_exempt(GraphQLView.as_view(graphiql=True)),
+        name="graphql"),
     url(r'^oauth/',
         include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'^schema/$', schema_view, name='schema'),
