@@ -1,10 +1,10 @@
 import graphene
 from graphene_django import DjangoObjectType
 from accelerator.models.expert_profile import ExpertProfile
-from impact.graphql.user import UserType
-from impact.graphql.industry import IndustryType
-from impact.graphql.program_family import ProgramFamilyType
-from impact.graphql.startup import StartupType
+from impact.graphql.user_type import UserType
+from impact.graphql.industry_type import IndustryType
+from impact.graphql.program_family_type import ProgramFamilyType
+from impact.graphql.startup_type import StartupType
 
 
 class ExpertProfileType(DjangoObjectType):

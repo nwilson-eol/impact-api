@@ -1,6 +1,6 @@
 import graphene
 
-from impact.graphql.expert_profile import ExpertProfileType
+from impact.graphql.expert_profile_type import ExpertProfileType
 from accelerator.models.expert_profile import ExpertProfile
 
 
