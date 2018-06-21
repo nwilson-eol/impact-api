@@ -84,7 +84,7 @@ urls = [
     url(r'^sso/', include(sso_urlpatterns, namespace="sso")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include(account_urlpatterns)),
-    url(r'^graphql/$', csrf_exempt(GraphQLView.as_view(graphiql=True)),
+    url(r'^graphql/$', csrf_exempt(GraphQLView.as_view(graphiql=settings.DEBUG)),
         name="graphql"),
     url(r'^oauth/',
         include('oauth2_provider.urls', namespace='oauth2_provider')),

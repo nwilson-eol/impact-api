@@ -42,7 +42,6 @@ class TestGraphQL(APITestCase):
                 }}
             """.format(id=user.expertprofile.id)
             response = self.client.post(self.url, data={'query': query})
-            self.maxDiff = None
             self.assertJSONEqual(
                 str(response.content, encoding='utf8'),
                 {
